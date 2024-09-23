@@ -276,7 +276,7 @@ The answer is also in the previous output
 Answer:
 ![task5d](assets/task5d.png) 
 
-##TASK 6- Troubleshooting Rule Syntax Errors
+## TASK 6- Troubleshooting Rule Syntax Errors
 
 I am going to be brief as possible as from now on due to how long the task is, so I will only provide the correction to the rules. Pay close attention to the signs and spaces. Also you are to only save the correct rules and apply them. Only the correct rules should be in your `local.rules `.
 
