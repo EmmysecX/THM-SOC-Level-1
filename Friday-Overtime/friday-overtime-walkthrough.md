@@ -1,6 +1,6 @@
 # Friday Overtime Writeup!!
 
-![FridayOvertime](assets/download1.png) 
+![FridayOvertime](assets/download2.png) 
 
 
 ## Scenario 
