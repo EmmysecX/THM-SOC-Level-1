@@ -95,7 +95,7 @@ sudo snort -r snort.log.1726996492 -X | grep ":4444"
 ```
 There were a lot of packets using this 4444.
 
-![port4444](assets/port444.png)
+![port4444](assets/port4444.png)
 
 I went to my `/etc/snort/rules` and opened the local.rules to write a rule to drop the packets.
 
@@ -120,12 +120,15 @@ The flag was already on the desktop after I ran it with correct command..
 ![Flag](assets/Flag.png)
 
 >Stop the attack and get the flag (which will appear on your Desktop)
+>
 >ANS: THM{0ead8c494861079b1b74ec2380d2cd24}
 >
 >What is the used protocol/port in the attack?
+>
 >ANS: TCP/4444
 >
 >Which tool is highly associated with this specific port number?
+>
 >ANS: Metasploit
 >
 
