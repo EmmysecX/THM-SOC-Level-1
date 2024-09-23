@@ -3,9 +3,11 @@ Description: Put your snort skills into practice and write snort rules to analys
 Difficulty: Medium
 
 ## TASK 1 - INTRODUCTION
+
 Nothing much, just launch your virtual machine to get started.
 
 ## TASK 2 - Writing IDS Rules (HTTP)
+
 Open the terminal and navigate to the task 2 folder. The packet capture (`mx-3.pcap`) and our rule file (`local.rules`) will be there. 
 
 **Question 1: Write a single rule to detect "all TCP port 80 traffic" packets in the given pcap file.**
@@ -107,6 +109,7 @@ Output:
 Answer: 307
 
 **Question2: What is the FTP service name?**
+
 If we try to read the packet (`ftp-png-gif.pcap`) directly, we won't understand because it is in binary format. So we will make use of strings which was taught in the snort room. This will help us extract the content in human readable format. 
 
 Command:
@@ -124,7 +127,8 @@ Output:
 
 Answer: Microsoft FTP Service
 
-**Question 3: Deactivate/comment on the old rules. Write a rule to detect failed FTP login attempts in the given pcap. What is the number of detected packets?
+**Question 3: Deactivate/comment on the old rules. Write a rule to detect failed FTP login attempts in the given pcap. What is the number of detected packets?**
+
 From the hint; Each failed FTP login attempt prompts a default message with the pattern; "530 User". Try to filter the given pattern in the inbound FTP traffic. We can use this hint to create a new rule: 
 
 ```shell
@@ -140,7 +144,8 @@ Output:
 
 Answer: 41
 
-**Question 4: Deactivate/comment on the old rule. Write a rule to detect successful FTP logins in the given pcap. What is the number of detected packets?
+**Question 4: Deactivate/comment on the old rule. Write a rule to detect successful FTP logins in the given pcap. What is the number of detected packets?**
+
 From the hint given, successful login attempt makes use of pattern: "230 user". So, we will edit the previous rule to make it match our new string. 
 
 ```shell
@@ -154,6 +159,7 @@ Output:
 Answer: 1
 
 **Question 4: Deactivate/comment on the old rule. Write a rule to detect FTP login attempts with a valid username but no password entered yet. What is the number of detected packets?**
+
 Same process, edit the rule and apply the rule with Snort.
 
 ```shell
@@ -165,6 +171,7 @@ Output:
 Answer: 42
 
 **Question 5: Deactivate/comment on the old rule. Write a rule to detect FTP login attempts with the "Administrator" username but no password entered yet. What is the number of detected packets?**
+
 With snort, we can make use of the content option multiple times within a single rule. So we will add content:"Administrator" to the rule:
 
 Rule: 
@@ -172,15 +179,17 @@ Rule:
 alert tcp any any <> any any (msg:"FTP -Administrator, no password";content:"331 Password";content:"Administrator";sid:1000001; rev :1;)
 ```
 Output: 
-![task3f](assets/task3f.png) 
+![task3f](assets/Task3f.png) 
 
 Answer: 7
 
 ## TASK 4- Writing IDS Rules (PNG)
+
 Navigate to the task folder.
 Use the given pcap file.
 
 **Question 1: Write a rule to detect the PNG file in the given pcap. Investigate the logs and identify the software name embedded in the packet.**
+
 For this task, we are going to be making use of file signatures. This signature are known as Magic Numbers and that is what we will use to match packets that contains PNG. Refer to this link: [file signatures](https://en.wikipedia.org/wiki/List_of_file_signatures)
 
 I made use of Ctrl+F to get the signature for PNG by searching for PNG. I copied it and we are going to use it for this rule.
@@ -211,6 +220,7 @@ Output:
 Answer: Adobe ImageReady
 
 **Question 2: Write a rule to detect the GIF file in the given pcap. Investigate the logs and identify the image format embedded in the packet.**
+
 We will refer to the link and look for the magic number for GIF. I found out that there are two ASCII codes for GIF. There's "GIF89a" (47 49 46 38 39 61) or "GIF87a" (47 49 46 38 37 61)
 
 So I wrote a rule for each of the ASCII codes and applied with SNORT but only one of them generated an answer. I will not tell us which of them worked but I will provide the rules. Goodluck!
@@ -226,6 +236,7 @@ alert tcp any any <> any any  (msg: "GIF87a file detected"; content:"|47 49 46 3
 One of them will give you the answer. Also when you get the alerts, make use of strings to generate the answer (sudo strings snort.log.123.....)
 
 ## TASK 5- Writing IDS Rules (Torrent Metafile)
+
 Navigate to the task folder.
 
 Use the given pcap file.
@@ -341,5 +352,138 @@ alert tcp any any <> any 80  (msg: ".http file found"; content:"|2E 68 74 6D 6C|
 
 ## TASK 7- Using External Rules (MS17-010)
 
+Navigate to the task folder.
+Use the given pcap file.
 
+**Question 1: Use the given rule file (local.rules) to investigate the ms1710 exploitation. What is the number of detected packets?**
 
+Use this command:
+
+```shell
+sudo snort -c local.rules -r ms-17-010.pcap
+```
+
+Output:
+![Task7a](assets/Task7a.png) 
+
+Read answer from the output
+
+**Question 2: Use local-1.rules empty file to write a new rule to detect payloads containing the "\IPC$" keyword. What is the number of detected packets?**
+
+I wrote this rule initially and got this error 
+Rule: 
+```shell
+alert tcp any any <> any any (msg: "IPC keyword found"; content: "\IPC$"; sid:1000001; rev:1;)
+```
+Error:
+![Task7error](assets/Task7error.png) 
+
+I searched for the error and I learnt that `\` must be escaped with `\`. So the right rule would be: 
+
+```shell
+alert tcp any any <> any any  (msg: "IPC keyword found"; content:"\\IPC$"; sid: 1000001; rev:1;)
+```
+Output:
+
+![Task7b](assets/Task7b.png)
+
+**Question 3: Investigate the log/alarm files. What is the requested path?**
+
+Log the filtered packet capture: 
+
+```shell
+sudo snort -r ms-17-010.pcap -c local-1.rules -l .
+```
+
+and look at its strings
+
+```shell
+sudo strings snort.log.1717898210
+```
+Output: 
+
+![Task7c](assets/Task7c.png) 
+
+**Question 4: What is the CVSS v2 score of the MS17-010 vulnerability?**
+
+You can easily search for this on Google 
+
+Answer: 9.3
+
+## TASK 8 -Using External Rules (Log4j) 
+
+Navigate to the task folder. Use the given pcap file. 
+
+**Question 1: Use the given rule file (local.rules) to investigate the log4j exploitation. What is the number of detected packets?**
+
+Execute Snort
+
+```shell
+sudo snort -c local.rules -r log4j.pcap -l .
+```
+Output:
+
+![Task8A](assets/Task8A.png)
+
+Answer: 26
+
+**Question 2: Investigate the log/alarm files. How many rules were triggered?.**
+
+When you sroll up in the previous output, you will see Events and that will give you the answer
+
+Output:
+
+![Task8b](assets/Task8b.png)
+
+**Question 3: Investigate the log/alarm files. What are the first six digits of the triggered rule sids?** 
+
+The rules and their IDs are listed at the end of the output
+
+Answer:
+
+![Task8c](assets/Task8c.png)
+
+**Question 4: Clear the previous log and alarm files. Use local-1.rules empty file to write a new rule to detect packet payloads between 770 and 855 bytes. What is the number of detected packets?**
+
+Write a rule in `local-1.rules`. The rule is:
+
+```shell
+alert tcp any any <> any any  (msg: "payloads between 770 and 855 bytes"; dsize: 770<>855; sid: 1000001; rev:1;)
+```
+Run
+
+```shell
+sudo snort -c local-1.rules -r log4j.pcap -l .
+```
+Output:
+
+![Task8d](assets/Task8d.png)
+
+**Question 5: Investigate the log/alarm files. What is the name of the used encoding algorithm?**
+
+We will run snort command and execute with `-A cmg` option to include payload data in the console output:
+
+```shell
+sudo snort -r snort.log.1717900099 -A cmg
+```
+The answer is in the second to last packet
+
+![Task8e](assets/Task8e.png)
+
+**Question 6: Investigate the log/alarm files. What is the IP ID of the corresponding packet?** 
+
+It's in the header of the same packet 
+
+![Task8f](assets/Task8f.png)
+
+**Question 7: Investigate the log/alarm files. Decode the encoded command. What is the attacker's command?** 
+
+It's in the payload of the same packet. I copied it and made use of Cyberchef to get the answer
+
+![Task8g](assets/Task8g.png)
+
+**Question 8: What is the CVSS v2 score of the Log4j vulnerability?**
+
+Make use of Google to get the answer
+
+Peace ✌ 
