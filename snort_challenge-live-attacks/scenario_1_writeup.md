@@ -93,7 +93,7 @@ I allowed the command to run for about 15-30 secs and stopped it. I decided to l
 
 ![screenshot](assets/screenshot1.png)
 
-Also I found another packet with that seems like someone was trying to use SSH
+Also I found another packet that seems like someone was trying to use SSH
 
 ![screenshot](assets/screenshot2.png) 
 
@@ -149,16 +149,16 @@ Then you will say the flag on the Desktop
 
 ![flag](assets/flag.png)
 
-ANSWER:
+>ANSWER:
 
-THM{81b7fef657f8aaa6e4e200d616738254}
+>THM{81b7fef657f8aaa6e4e200d616738254}
 
 >Question 2: What is the name of the service under attack?
->
+
 >ANSWER: SSH
->
+
 >Question 3: What is the used protocol/port in the attack?
->
+
 >ANSWER: TCP/22
 >
 
