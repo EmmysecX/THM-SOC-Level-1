@@ -1,5 +1,9 @@
 # Snort Challenge - The Basics
+
+![snort challenge1](assets/snortchall.png) 
+
 Description: Put your snort skills into practice and write snort rules to analyse live capture network traffic.
+
 Difficulty: Medium
 
 ## TASK 1 - INTRODUCTION
