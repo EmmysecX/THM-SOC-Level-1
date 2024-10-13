@@ -22,7 +22,7 @@
 
 I opened File Explorer, went to the Desktop, clicked on the file, then went to Home in the menu bar, and selected Copy Path.
 
-`[assets/path.png]`
+![path to the text file](assets/path.png) 
 
 **ANS:** `C:\Users\Sophie\Desktop\SOPHIE.txt`
 
@@ -40,7 +40,7 @@ Since it was a text file, I guessed and got it right.
 
 It was a process created by Notepad, so I opened Event Viewer, filtered the log with Event ID 1, then used the find button to search for `notepad.exe` and found it.
 
-`[image]`
+![UTC time for the notepad.exe process](assets/utctime.png)
 
 **ANS:** `2024-01-08 14:25:30`
 
@@ -58,7 +58,7 @@ It was a process created by Notepad, so I opened Event Viewer, filtered the log 
 
 Since the file was downloaded, I went to the Downloads folder. It was empty, but she said she downloaded it from Google, so I checked Microsoft Edge’s download history and found two files. The one she downloaded is the antivirus.
 
-`[image.png]`
+![the file she downloaded](assets/installer.png)
 
 **ANS:** `antivirus.exe`
 
@@ -68,7 +68,7 @@ Since the file was downloaded, I went to the Downloads folder. It was empty, but
 
 In the browser, I opened the file location, then right-clicked on the file, checked the properties, and found the file path.
 
-`[image.png]`
+![installer file location](assets/anti_location.png)
 
 **ANS:** `C:\Users\Sophie\download`
 
@@ -76,9 +76,9 @@ In the browser, I opened the file location, then right-clicked on the file, chec
 
 **Q6. The installer encrypts files and then adds a file extension to the end of the file name. What is this file extension?**
 
-I opened Event Viewer, scrolled through the events, and saw that file creation was marked with Event ID 11. I filtered the log with this ID and searched for the installer.
+I opened Event Viewer, scrolled through the events, and saw that file creation was marked with Event ID 11. I filtered the log with this ID and searched for the installer using find.
 
-`[image.png]`
+![the file extension](assets/dmpfile.png)
 
 **ANS:** `.dmp`
 
@@ -88,7 +88,9 @@ I opened Event Viewer, scrolled through the events, and saw that file creation w
 
 The Event ID for network connections is 3, so I filtered the logs by this ID, searched for `antivirus.exe`, clicked on the event, and checked the destination IP address.
 
-`[image.png]`
+![find installer](assets/findantivirus.png)
+
+![destination IP](assets/destip.png)
 
 **ANS:** `10.10.8.111`
 
@@ -104,7 +106,9 @@ The Event ID for network connections is 3, so I filtered the logs by this ID, se
 
 This is still a network connection, so I left the filter on Event ID 3, searched for `RDP`, clicked on details, and found the source IP. It took a few tries to get the right one.
 
-`[image.png]`
+![find RDP](assets/RDPsearch.png)
+
+![source IP](assets/sourceip.png)
 
 **ANS:** `10.11.27.46`
 
@@ -114,7 +118,7 @@ This is still a network connection, so I left the filter on Event ID 3, searched
 
 I suspected the other downloaded file was the decryptor, so I went to Event Viewer, searched for `decryptor`, and checked the event for process creation.
 
-`[image.png]`
+![UTC time for the other downloaded file](assets/decryptortime.png)
 
 **ANS:** `2024-01-08 14:24:18`
 
