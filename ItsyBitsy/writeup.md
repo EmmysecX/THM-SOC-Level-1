@@ -16,7 +16,7 @@ I navigated to the **Discover** tab in Kibana and filtered the date range from M
 
 ![date to check](assets/march_date.png)
 
-![Number of hits in March](assets/march_hit.png)
+![Number of hits in March](assets/march_hits.png)
 
 **Answer:** 1482
 
