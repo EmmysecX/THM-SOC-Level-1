@@ -14,7 +14,9 @@ In this room, we’ll be examining these logs to uncover the connection details,
 
 I navigated to the **Discover** tab in Kibana and filtered the date range from March 1, 00:00 to March 31, 23:30. The number of hits is shown below:
 
-![Number of hits in March](assets/hit.png)
+![date to check](assets/march_date.png)
+
+![Number of hits in March](assets/march_hit.png)
 
 **Answer:** 1482
 
