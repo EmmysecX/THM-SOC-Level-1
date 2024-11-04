@@ -51,7 +51,7 @@ I found this information in the SAM Hive: `SAM > Root > SAM > Domains > Account 
 
 The RID (Relative Identifier) is part of a SID (Security Identifier) uniquely identifying users and groups. The Administrator RID is typically `500`, which I verified in the registry.
 
-![RID](assets/Sreenshot3.png)
+![RID](assets/Screenshot3.png)
 
 **Answer:** `500`
 
