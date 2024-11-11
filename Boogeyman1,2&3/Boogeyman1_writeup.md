@@ -58,8 +58,8 @@ The password was given already
 
 > ANS: Invoice2023!
 
-> **2.6 Based on the result of the lnkparse tool, what is the encoded payload found in the Command Line Arguments field?**
->
+**Q2.6 Based on the result of the lnkparse tool, what is the encoded payload found in the Command Line Arguments field?**
+
 I ran the command `lnkparse Invoice_20230103.lnk`, then scrolled through the results to locate the command.
 
 ![encoded payload](assets1/Task2_screenshot4.png)
@@ -74,25 +74,25 @@ Decoding the payload reveals the starting point of endpoint activities.
 
 ### Answer the questions below
 
->**3.1 What are the domains used by the attacker for file hosting and C2? Provide the domains in alphabetical order. (e.g. a.domain.com,b.domain.com)**
->
+**Q3.1 What are the domains used by the attacker for file hosting and C2? Provide the domains in alphabetical order. (e.g. a.domain.com,b.domain.com)**
+
 I started by parsing the JSON into a beautified output so I will know what field to search for. I went with the ScriptBlockText and used this command ; `cat powershell.json | jq .ScriptBlockText`
 Scrolled up to check the result to find what I was looking for.
 
 ![domains used by the attcker](assets1/Task3_screenshot1.png)
 
-**ANS: cdn.bpakcaging.xyz,files.bpakcaging.xyz**
+> ANS: cdn.bpakcaging.xyz,files.bpakcaging.xyz
 
->**3.2 What is the name of the enumeration tool downloaded by the attacker?**
->
+**Q3.2 What is the name of the enumeration tool downloaded by the attacker?**
+
 I searched through the same output and found a download link with the tool name.
 
 ![enumeration tool](assets1/Task3_screensshot2.png)
 
-**ANS: seatbelt**
+> ANS: seatbelt
 
->**3.3 What is the file accessed by the attacker using the downloaded sq3.exe binary? Provide the full file path with escaped backslashes.**
->
+**Q3.3 What is the file accessed by the attacker using the downloaded sq3.exe binary? Provide the full file path with escaped backslashes.**
+
 I checked the output again and found the full path of the file being accessed. 
 
 ![file accessed by attacker](assets1/Task3_screenshot3a.png)
@@ -101,37 +101,37 @@ I then reviewed the CD commands to confirm the path.
 
 ![file accessed by attacker](assets1/Task3_screenshot3B.png)
 
-**ANS: C:\\Users\\j.westcott\\AppData\\Local\\Packages\\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe\\LocalState\\plum.sqlite**
+> ANS: C:\\Users\\j.westcott\\AppData\\Local\\Packages\\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe\\LocalState\\plum.sqlite
 
->**3.4 What is the software that uses the file in Q3?**
->
+**Q3.4 What is the software that uses the file in Q3?**
+
 From the file path, it’s clear which software uses the file.
 
-**ANS: Microsoft Sticky Notes**
+>ANS: Microsoft Sticky Notes
 
->**3.5 What is the name of the exfiltrated file?**
->
+**Q3.5 What is the name of the exfiltrated file?**
+
 I found this in the same output, it is in the second image in Q3.3 above.
 
-**ANS: protected_data.kdbx**
+> ANS: protected_data.kdbx
 
->**3.6 What type of file uses the .kdbx file extension?
->
-**ANS: keepass**
+**Q3.6 What type of file uses the .kdbx file extension?**
 
->**3.7 What is the encoding used during the exfiltration attempt of the sensitive file?**
->
+> ANS: keepass
+
+**Q3.7 What is the encoding used during the exfiltration attempt of the sensitive file?**
+
 I continued checking the output and found an encoding value.
 
 ![encoding used](assets1/Task3_screenshot4.png)
 
-**ANS: hex**
+> ANS: hex
 
->**3.8 What is the tool used for exfiltration?**
->
+**Q3.8 What is the tool used for exfiltration?**
+
 Check the screenshot above in 3.7
 
-**ANS: nslookup**
+> ANS: nslookup
 
 ---
 ## TASK 4: [Network Traffic Analysis] They got us. Call the bank immediately!
@@ -143,8 +143,8 @@ The domains and ports used for the network activity were discovered, including t
 
 ### Answer the questions below
 
->**4.1 What software is used by the attacker to host its presumed file/payload server?**
->
+**Q4.1 What software is used by the attacker to host its presumed file/payload server?**
+
 I guessed python and I was right, 😄
 
 but as a security analyst, I decided to verify it properly. Given the malicious domains, I filtered the display for HTTP packets related to `files.bpakcaging.xyz`.
@@ -152,22 +152,22 @@ but as a security analyst, I decided to verify it properly. Given the malicious 
 ![payload server](assets1/Task4_screenshot1a.png)
 ![payload server](assets1/Task4_screenshot1b.png)
 
-**ANS: python**
+> ANS: python
 
->**4.2 What HTTP method is used by the C2 for the output of the commands executed by the attacker?**
->
+**Q4.2 What HTTP method is used by the C2 for the output of the commands executed by the attacker?**
+
 Since the attacker is exfiltrating data and not requesting it, the HTTP method used is POST.
 
-**ANS: POST**
+> ANS: POST
 
->**4.3 What is the protocol used during the exfiltration activity?**
->
+**Q4.3 What is the protocol used during the exfiltration activity?**
+
 From Task 3, Question 8, we already know the tool used for exfiltration was nslookup, so the protocol is DNS.
 
-**ANS: DNS**
+> ANS: DNS
 
->**4.4 What is the password of the exfiltrated file?**
->
+**Q4.4 What is the password of the exfiltrated file?**
+
 I made use of the hint THM gave me. I filtered the wireshark packets to search for http that contains sq3.exe 
 
 I got 4 results, then I followed the TCP stream of each of them until I got to the last one then I found the same command that was found in the powershell log. 
@@ -182,10 +182,10 @@ Then I took it to cyberchef and used the magic function and yes cyberchef can de
 
 ![password found](assets1/Task4_screenshot2c.png)
 
-**ANS: %p9^3!lL^Mz47E2GaT^y**
+> ANS: %p9^3!lL^Mz47E2GaT^y
 
->**4.5 What is the credit card number stored inside the exfiltrated file?**
->
+**Q4.5 What is the credit card number stored inside the exfiltrated file?**
+
 From previous investigations, Since the exfiltrated file was sent via DNS queries to `bpakcaging.xyz`, I filtered for relevant DNS queries and extracted the credit card number.
 ```
 tshark -r capture.pcapng  -Y 'dns' -T fields -e dns.qry.name |grep ".bpakcaging.xyz"
@@ -216,6 +216,8 @@ Then I went ahead to open the kdbx file. It required the master password I got i
 Then I was able to copy the account number
 
 ![the kdbx file](assets1/Task4_screenshot3e.png)
+
+> ANS: 4024007128269551
 
 ---
 ## Conclusion
