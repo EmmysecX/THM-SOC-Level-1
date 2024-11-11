@@ -26,24 +26,24 @@ I opened the email using Thunderbird and copied the sender’s address.
 
 ![sender mail](assets1/Task2_screenshot1.png)
 
-`ANS: agriffin@bpakcaging[.]xyz `(defanged)
+> ANS: agriffin@bpakcaging[.]xyz (defanged)
 
-**2.2 What is the email address of the victim?**
+**Q2.2 What is the email address of the victim?**
 
-- I followed the same process as above to identify the victim’s email.
+I followed the same process as above to identify the victim’s email.
 
-**ANS: julianne.westcott@hotmail[.]com**
+> ANS: julianne.westcott@hotmail[.]com
 
-> **2.3 What is the name of the third-party mail relay service used by the attacker based on the DKIM-Signature and List-Unsubscribe headers?**
->
+**Q2.3 What is the name of the third-party mail relay service used by the attacker based on the DKIM-Signature and List-Unsubscribe headers?**
+
 I used the terminal to read the `dump.eml` file and searched for the DKIM signature.
 
 ![DKIM-signature](assets1/Task2_screenshot2.png)
 
-**ANS: elasticemail**
+> ANS: elasticemail
 
-> **2.4 What is the name of the file inside the encrypted attachment?**
->
+**Q2.4 What is the name of the file inside the encrypted attachment?**
+
 I opened the file with the `cat` command, and there I found a base64 string. Following the hints from TryHackMe, I copied the base64 string, used `echo` to rebuild the payload.
 
 ![filename](assets1/Task2_screenshot3a.png)
@@ -52,11 +52,11 @@ The password was given already
 
 ![filename](assets1/Task2_screenshot3b.png)
 
-**ANS: Invoice_20230103.lnk**
+> ANS: Invoice_20230103.lnk
 
-> **2.5 What is the password of the encrypted attachment?**
->
-**ANS: Invoice2023!**
+**Q2.5 What is the password of the encrypted attachment?**
+
+> ANS: Invoice2023!
 
 > **2.6 Based on the result of the lnkparse tool, what is the encoded payload found in the Command Line Arguments field?**
 >
