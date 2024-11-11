@@ -20,13 +20,13 @@ You are tasked to analyse and assess the impact of the compromise.
 
 ### Answer the questions below
 
-> **2.1 What is the email address used to send the phishing email?**
->
+**Q2.1 What is the email address used to send the phishing email?**
+
 I opened the email using Thunderbird and copied the sender’s address.
 
 ![sender mail](assets1/Task2_screenshot1.png)
 
-**ANS: agriffin@bpakcaging[.]xyz** (defanged)
+`ANS: agriffin@bpakcaging[.]xyz `(defanged)
 
 **2.2 What is the email address of the victim?**
 
