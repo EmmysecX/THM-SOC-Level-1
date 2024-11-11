@@ -16,7 +16,7 @@ The security team was able to flag the suspicious execution of the attachment, i
 
 You are tasked to analyse and assess the impact of the compromise.
 
-## Answer the questions below
+### Answer the questions below
 
 > **2.1 What is the email address used to send the phishing email?**
 >
@@ -70,7 +70,7 @@ Based on the initial findings, we discovered how the malicious attachment compro
 A PowerShell command was executed.
 Decoding the payload reveals the starting point of endpoint activities. 
 
-## Answer the questions below
+### Answer the questions below
 
 >**3.1 What are the domains used by the attacker for file hosting and C2? Provide the domains in alphabetical order. (e.g. a.domain.com,b.domain.com)**
 >
@@ -139,7 +139,7 @@ Based on the PowerShell logs investigation, we have seen the full impact of the 
 The threat actor was able to read and exfiltrate two potentially sensitive files.
 The domains and ports used for the network activity were discovered, including the tool used by the threat actor for exfiltration.
 
-## Answer the questions below
+### Answer the questions below
 
 >**4.1 What software is used by the attacker to host its presumed file/payload server?**
 >
