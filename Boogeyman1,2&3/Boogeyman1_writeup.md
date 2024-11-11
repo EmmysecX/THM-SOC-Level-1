@@ -1,6 +1,8 @@
 # Boogeyman 1
 A new threat actor emerges from the wild using the name Boogeyman. Are you afraid of the Boogeyman?
 
+![Boogeyman1](assets1/Boogeyman1.png)
+
 ## TASK 1: [Introduction] New threat in town.
 Uncover the secrets of the new emerging threat, the Boogeyman.
 
@@ -10,7 +12,7 @@ In this room, you will be tasked to analyse the Tactics, Techniques, and Procedu
 
 The Boogeyman is here!
 
-Julianne, a finance employee working for Quick Logistics LLC, received a follow-up email regarding an unpaid invoice from their business partner, B Packaging Inc. Unbeknownst to her, the attached document was malicious and compromised her workstation.
+Julianne, a finance employee working for **Quick Logistics LLC**, received a follow-up email regarding an unpaid invoice from their business partner, B Packaging Inc. Unbeknownst to her, the attached document was malicious and compromised her workstation.
 
 The security team was able to flag the suspicious execution of the attachment, in addition to the phishing reports received from the other finance department employees, making it seem to be a targeted attack on the finance team. Upon checking the latest trends, the initial TTP used for the malicious attachment is attributed to the new threat group named Boogeyman, known for targeting the logistics sector.
 
@@ -20,29 +22,29 @@ You are tasked to analyse and assess the impact of the compromise.
 
 > **2.1 What is the email address used to send the phishing email?**
 >
-I opened the mail with Thunderbird and copied the email address
+I opened the email using Thunderbird and copied the sender’s address.
 
 ![sender mail](assets1/Task2_screenshot1.png)
 
-**ANS:agriffin@bpakcaging.xyz**
+`**ANS:agriffin@bpakcaging.xyz**`
 
 > **2.2 What is the email address of the victim?**
 >
-Also, same process as above. The email is in the screenshot
+I followed the same process as above to identify the victim’s email.
 
-**ANS: julianne.westcott@hotmail.com**
+`**ANS: julianne.westcott@hotmail.com**`
 
 > **2.3 What is the name of the third-party mail relay service used by the attacker based on the DKIM-Signature and List-Unsubscribe headers?**
 >
-I made use of the terminal to read the dump.eml file and grep for DKIM
+I used the terminal to read the `dump.eml` file and searched for the DKIM signature.
 
 ![DKIM-signature](assets1/Task2_screenshot2.png)
 
-**ANS: elasticemail**
+`**ANS: elasticemail**`
 
 > **2.4 What is the name of the file inside the encrypted attachment?**
 >
-I read the file with cat command, then I saw a base64 string. THM already gave us tips on how to go about this. So I copied the base64 string and used echo to rebuild the payload. 
+I opened the file with the `cat` command, and there I found a base64 string. Following the hints from TryHackMe, I copied the base64 string, used `echo` to rebuild the payload.
 
 ![filename](assets1/Task2_screenshot3a.png)
 
@@ -58,7 +60,7 @@ The password was given already
 
 > **2.6 Based on the result of the lnkparse tool, what is the encoded payload found in the Command Line Arguments field?**
 >
-I used the command “ lnkparse Invoice_20230103.lnk” then in the result, I scrolled up a little then found the command
+I ran the command `lnkparse Invoice_20230103.lnk`, then scrolled through the results to locate the command.
 
 ![encoded payload](assets1/Task2_screenshot4.png)
 
@@ -91,11 +93,11 @@ I searched through the same output and found a download link with the tool name.
 
 >**3.3 What is the file accessed by the attacker using the downloaded sq3.exe binary? Provide the full file path with escaped backslashes.**
 >
-Checked the same output and saw the binary executed and the full path. 
+I checked the output again and found the full path of the file being accessed. 
 
 ![file accessed by attacker](assets1/Task3_screenshot3a.png)
 
-Then to get the full path, I checked the cd commands
+I then reviewed the CD commands to confirm the path.
 
 ![file accessed by attacker](assets1/Task3_screenshot3B.png)
 
@@ -103,7 +105,7 @@ Then to get the full path, I checked the cd commands
 
 >**3.4 What is the software that uses the file in Q3?**
 >
-I got this from the full path above.
+From the file path, it’s clear which software uses the file.
 
 **ANS: Microsoft Sticky Notes**
 
@@ -119,7 +121,7 @@ I found this in the same output, it is in the second image in Q3.3 above.
 
 >**3.7 What is the encoding used during the exfiltration attempt of the sensitive file?**
 >
-Still on the same output, looked for anything that looks like encoding and I found it
+I continued checking the output and found an encoding value.
 
 ![encoding used](assets1/Task3_screenshot4.png)
 
@@ -143,9 +145,9 @@ The domains and ports used for the network activity were discovered, including t
 
 >**4.1 What software is used by the attacker to host its presumed file/payload server?**
 >
-I just guessed python and I was right, lol
+I guessed python and I was right, 😄
 
-But then as a security analyst, I decided to do it the right way. Since I already have the malicious domains, I filtered the display for http packets that contained files.bpakcaging.xyz. 
+but as a security analyst, I decided to verify it properly. Given the malicious domains, I filtered the display for HTTP packets related to `files.bpakcaging.xyz`.
 
 ![payload server](assets1/Task4_screenshot1a.png)
 ![payload server](assets1/Task4_screenshot1b.png)
@@ -154,13 +156,13 @@ But then as a security analyst, I decided to do it the right way. Since I alread
 
 >**4.2 What HTTP method is used by the C2 for the output of the commands executed by the attacker?**
 >
-Since, we know the attacker is exfiltrating the data out and not requesting it in, the method would be POST
+Since the attacker is exfiltrating data and not requesting it, the HTTP method used is POST.
 
 **ANS: POST**
 
 >**4.3 What is the protocol used during the exfiltration activity?**
 >
-In task 3, question 8 the tool the attacker used was nslookup so the protocol is DNS
+From Task 3, Question 8, we already know the tool used for exfiltration was nslookup, so the protocol is DNS.
 
 **ANS: DNS**
 
@@ -184,14 +186,14 @@ Then I took it to cyberchef and used the magic function and yes cyberchef can de
 
 >**4.5 What is the credit card number stored inside the exfiltrated file?**
 >
-From previous investigations, I already knew that the file was extracted through DNS. The attacker uses bpackcaging.xyz, so I filtered for DNS queries containing this domain.
+From previous investigations, Since the exfiltrated file was sent via DNS queries to `bpakcaging.xyz`, I filtered for relevant DNS queries and extracted the credit card number.
 ```
 tshark -r capture.pcapng  -Y 'dns' -T fields -e dns.qry.name |grep ".bpakcaging.xyz"
 ```
 
 ![output1](assets1/Task4_screenshot3a.png)
 
-There are duplicates and unnecessary results so I had to clean the data 
+There are duplicates and other unnecessary results so I had to clean the data 
 ```
 tshark -r capture.pcapng  -Y 'dns' -T fields -e dns.qry.name |grep ".bpakcaging.xyz" | cut -f1 -d '.'|grep -v -e "files" -e "cdn" | uniq
 ```
@@ -219,9 +221,9 @@ Then I was able to copy the account number
 ## Conclusion
 
 Omoooo x10000
-This last question took a lot of trial and error. I used chatgpt in troubleshooting. It kept saying data was corrupted whenever I tried to open the file.
+This last question took a lot of trial and error, and I had to troubleshoot using ChatGPT. It kept saying the data was corrupted whenever I tried to open the file.
 
-Anyways, mission accomplished  I learned how the Boogeyman infected the victim’s device with a malicious attachment, collected and exfiltrated data with PowerShell and DNS, and stole credit card data stored in KeePass. 
+Anyways, mission accomplished! I’ve learned how the Boogeyman infected the victim’s device with a malicious attachment, collected and exfiltrated data using PowerShell and DNS, and stole credit card data stored in KeePass.
 
 
 
