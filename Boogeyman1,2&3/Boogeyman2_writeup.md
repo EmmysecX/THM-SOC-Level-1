@@ -53,11 +53,11 @@ I found a suspicious URL that points to an image file so I copied the URL and th
 
 ![url used to downlaod the stage2 payload](assets2/Task2_screenshot4.png)
 
-I also found other things I might be interested in later; a javascript file and a process.
+I also found other things that might be of interest later, such as a JavaScript file and a process.
 
 **Q2.6 What is the name of the process that executed the newly downloaded stage 2 payload?**
 
-In the previous task, I found a process so I decided to try if this was the process that executed the download and guess what? Yes it is!
+In the previous task, I found a process, so I decided to check if this was the process that executed the download. Guess what? It was!
 
 ![process that executed the newly downloaded stage 2 payload](assets2/Task2_screenshot5.png)
 
@@ -65,20 +65,19 @@ In the previous task, I found a process so I decided to try if this was the proc
 
 **Q2.7 What is the full file path of the malicious stage 2 payload?**
 
-Since I found the process that executed the payload, in my current output. I saw the path that the process was executed on and that was it.
+Since I found the process that executed the payload, I looked at the path where the process was executed from in the current output.  
 Check the screenshot above 
 
 > ANS: C:\ProgramData\update.js
 
 **Q2.8 What is the PID of the process that executed the stage 2 payload?**
 
-To actually get the PID, I had to make use of volatility to read the captured memory dump
- 
+To get the PID, I had to use Volatility to read the captured memory dump.  
 Command: 
 ```
 vol -f WKSTN-2961.raw windows.pslist
 ```
-This will list all the processes running on the machine as at the time of capture.
+This lists all the processes running on the machine at the time of capture.
 
 ![process list](assets2/Task2_screenshot6a.png)
 ![process list](assets2/Task2_screenshot6b.png)
@@ -93,13 +92,12 @@ From the screenshot above, beside the PID column is the PPID column
 
 **Q2.10 What URL is used to download the malicious binary executed by the stage 2 payload?**
 
-Since  I already found one URL earlier, I decided to search for the domain in the memory dump to see if there is any other URL
-
+Since I had already found one URL earlier, I decided to search for the domain in the memory dump to see if there were any other URLs.
 Command: 
 ```
 strings WKSTN-2961.raw | grep 'boogeymanisback'
 ```
-Well it is the same URL as the one I found earlier. 
+Well, it was the same URL I found earlier.
 
 ![URL used to download the malicious binary](assets2/Task2_screenshot7.png)
 
@@ -117,8 +115,7 @@ vol -f WKSTN-2961.raw windows.pslist
 
 **Q2.12 What is the full file path of the malicious process used to establish the C2 connection?**
 
-I checked vol -h to check for command line related help. I knew I was looking for the updater.exe path
-
+I checked Volatility’s help (vol -h) to find command-line related instructions. I knew I was looking for the path of `updater.exe`.
 Command:
 ```
 vol -f WKSTN-2961.raw windows.cmdline
@@ -142,19 +139,17 @@ vol -f WKSTN-2961.raw windows.netscan
 **Q2.14 What is the full file path of the malicious email attachment based on the memory dump?**
 
 I searched for the name of the attachment using strings 
-
 Command: 
 ```
 strings WKSTN-2961.raw | grep 'Resume_Wesley'
 ```
-
 ![full file path of malicious attachment](assets2/Task2_screenshot11.png)
 
 > ANS: C:\Users\maxine.beck\AppData\Local\Microsoft\Windows\INetCache\Content.Outlook\WQHGZCFI\Resume_WesleyTaylor (002).doc
 
 **Q2.15 The attacker implanted a scheduled task right after establishing the c2 callback. What is the full command used by the attacker to maintain persistent access?**
 
-I checked the hint and so I decided to search for “schtasks” using strings
+I searched for “schtasks” using strings.
 
 Command: 
 ```
@@ -167,4 +162,8 @@ And that is how the attacker planted a scheduled task as a persistence mechanism
 
 ## Conclusion
 
+Through this investigation, I was able to uncover the full sequence of events that took place after Maxine, the HR Specialist, was compromised by the Boogeyman threat group. 
 
+The attacker also maintained persistence on the system by planting a scheduled task. By analyzing memory dumps, strings, and running processes, I was able to identify the specific commands, processes, and URLs that were leveraged to compromise the system and establish C2 communication.
+
+This investigation highlighted the importance of monitoring suspicious processes, memory analysis, and persistence mechanisms used by attackers. 
