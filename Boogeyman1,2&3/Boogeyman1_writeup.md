@@ -26,13 +26,13 @@ I opened the email using Thunderbird and copied the sender’s address.
 
 ![sender mail](assets1/Task2_screenshot1.png)
 
-**ANS:agriffin@bpakcaging.xyz**
+**ANS: agriffin@bpakcaging[.]xyz** (defanged)
 
 > **2.2 What is the email address of the victim?**
 >
 I followed the same process as above to identify the victim’s email.
 
-**ANS: julianne.westcott@hotmail.com**
+**ANS: julianne.westcott@hotmail[.]com**
 
 > **2.3 What is the name of the third-party mail relay service used by the attacker based on the DKIM-Signature and List-Unsubscribe headers?**
 >
