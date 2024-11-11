@@ -87,7 +87,7 @@ Scrolled up to check the result to find what I was looking for.
 
 I searched through the same output and found a download link with the tool name.
 
-![enumeration tool](assets1/Task3_screensshot2.png)
+![enumeration tool](assets1/Task3_screenshot2.png)
 
 > ANS: seatbelt
 
@@ -99,7 +99,7 @@ I checked the output again and found the full path of the file being accessed.
 
 I then reviewed the CD commands to confirm the path.
 
-![file accessed by attacker](assets1/Task3_screenshot3B.png)
+![file accessed by attacker](assets1/Task3_screenshot3b.png)
 
 > ANS: C:\\Users\\j.westcott\\AppData\\Local\\Packages\\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe\\LocalState\\plum.sqlite
 
@@ -172,7 +172,7 @@ I made use of the hint THM gave me. I filtered the wireshark packets to search f
 
 I got 4 results, then I followed the TCP stream of each of them until I got to the last one then I found the same command that was found in the powershell log. 
 
-![command](assets/Task4_screenshot2a.png)
+![command](assets1/Task4_screenshot2a.png)
 
 I decided to follow the subsequent stream and I saw an output that I didn't understand. 
 
