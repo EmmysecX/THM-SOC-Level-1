@@ -163,7 +163,7 @@ Command:
 strings WKSTN-2961.raw | grep 'schtasks'
 ```
 
-![persistent access](assets12/Task2_screenshot12.png)
+![persistent access](assets2/Task2_screenshot12.png)
 
 And that is how the attacker planted a scheduled task as a persistence mechanism!!
 
