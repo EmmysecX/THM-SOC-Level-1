@@ -156,3 +156,6 @@ Why did I search for ntlm in question 2.8? NTLM (NT LAN Manager) is a protocol u
 
 In this task, we successfully traced the Boogeyman's steps from the initial phishing attack to the final stages of credential dumping, lateral movement, and ransomware deployment. By analyzing key logs and system events, we were able to identify the tools and techniques used by the attacker, including UAC bypass, credential dumping, and DCSync attacks. This exercise highlights the importance of monitoring system events, tracking command-line activity, and analyzing network traffic to detect and mitigate advanced persistent threats in a timely manner.
 
+Please note that the answers provided in this write-up have been defanged for safety and security purposes. The original answers do not have to be defanged.
+
+
