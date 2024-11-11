@@ -28,9 +28,9 @@ I opened the email using Thunderbird and copied the sender’s address.
 
 **ANS: agriffin@bpakcaging[.]xyz** (defanged)
 
-> **2.2 What is the email address of the victim?**
->
-I followed the same process as above to identify the victim’s email.
+**2.2 What is the email address of the victim?**
+
+- I followed the same process as above to identify the victim’s email.
 
 **ANS: julianne.westcott@hotmail[.]com**
 
