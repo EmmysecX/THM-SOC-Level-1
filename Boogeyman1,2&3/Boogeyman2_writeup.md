@@ -167,3 +167,5 @@ Through this investigation, I was able to uncover the full sequence of events th
 The attacker also maintained persistence on the system by planting a scheduled task. By analyzing memory dumps, strings, and running processes, I was able to identify the specific commands, processes, and URLs that were leveraged to compromise the system and establish C2 communication.
 
 This investigation highlighted the importance of monitoring suspicious processes, memory analysis, and persistence mechanisms used by attackers. 
+
+Please note that the answers provided in this write-up have been defanged for safety and security purposes. The original answers do not have to be defanged.
